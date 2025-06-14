@@ -1,3 +1,5 @@
+import fs from "fs";
+
 function matchPattern(inputLine, pattern) {
     if (pattern.length === 1) {
         return inputLine.includes(pattern);
@@ -8,7 +10,7 @@ function matchPattern(inputLine, pattern) {
 
 function main() {
     const pattern = process.argv[3];
-    const inputLine = require("fs").readFileSync(0, "utf-8").trim();
+    const inputLine = fs.readFileSync(0, "utf-8").trim();
 
     if (process.argv[2] !== "-E") {
         console.log("Expected first argument to be '-E'");
