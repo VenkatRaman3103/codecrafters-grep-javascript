@@ -12,6 +12,10 @@ function matchPattern(inputLine, pattern) {
         const chars = pattern.slice(1, -1);
         const regEx = new RegExp(`[${chars}]`, "g");
         return regEx.test(inputLine);
+    } else if (pattern.includes("\\")) {
+        const regex = new RegExp(pattern);
+        console.log(regex, inputLine, regex.test(inputLine));
+        return regex.test(inputLine);
     } else {
         throw new Error(`Unhandled pattern ${pattern}`);
     }
