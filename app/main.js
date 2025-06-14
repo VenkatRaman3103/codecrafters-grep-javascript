@@ -26,6 +26,14 @@ function matchPattern(inputLine, pattern) {
     } else if (pattern.includes("?")) {
         const regex = new RegExp(pattern);
         return regex.test(inputLine);
+    } else if (pattern.includes(".")) {
+        const leftInd = pattern.indexOf(".") - 1;
+        const rightInd = pattern.indexOf(".") + 1;
+        const leftChar = pattern[leftInd];
+        const rightCahr = pattern[rightInd];
+        return (
+            leftChar == inputLine[leftInd] && rightCahr == inputLine[rightInd]
+        );
     } else {
         throw new Error(`Unhandled pattern ${pattern}`);
     }
