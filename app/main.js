@@ -21,7 +21,9 @@ function matchPattern(inputLine, pattern) {
         const comp = pattern.slice(0, pattern.length - 1);
         return inputLine.endsWith(comp);
     } else if (pattern.includes("+")) {
-        const comp = pattern[pattern.indexOf("+") - 1];
+        const regex = new RegExp(pattern);
+        return regex.test(inputLine);
+    } else if (pattern.includes("?")) {
         const regex = new RegExp(pattern);
         return regex.test(inputLine);
     } else {
