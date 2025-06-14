@@ -14,9 +14,12 @@ function matchPattern(inputLine, pattern) {
     } else if (pattern.includes("\\")) {
         const regex = new RegExp(pattern);
         return regex.test(inputLine);
-    } else if (pattern.startsWith("^")) {
+    } else if (pattern[0] == "^") {
         const comp = pattern.slice(1);
         return inputLine.startsWith(comp);
+    } else if (pattern[pattern.length - 1] == "$") {
+        const comp = pattern.slice(0, pattern.length - 1);
+        return inputLine.endsWith(comp);
     } else {
         throw new Error(`Unhandled pattern ${pattern}`);
     }
