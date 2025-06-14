@@ -1,7 +1,6 @@
 import fs from "fs";
 
 function matchPattern(inputLine, pattern) {
-    console.log(inputLine, pattern);
     if (pattern.length === 1) {
         return inputLine.includes(pattern);
     } else if (pattern === "\\d") {
@@ -14,8 +13,10 @@ function matchPattern(inputLine, pattern) {
         return regEx.test(inputLine);
     } else if (pattern.includes("\\")) {
         const regex = new RegExp(pattern);
-        console.log(regex, inputLine, regex.test(inputLine));
         return regex.test(inputLine);
+    } else if (pattern.startsWith("^")) {
+        const comp = pattern.slice(1);
+        return inputLine.startsWith(comp);
     } else {
         throw new Error(`Unhandled pattern ${pattern}`);
     }
