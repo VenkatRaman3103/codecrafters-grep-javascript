@@ -20,6 +20,10 @@ function matchPattern(inputLine, pattern) {
     } else if (pattern[pattern.length - 1] == "$") {
         const comp = pattern.slice(0, pattern.length - 1);
         return inputLine.endsWith(comp);
+    } else if (pattern.includes("+")) {
+        const comp = pattern[pattern.indexOf("+") - 1];
+        const regex = new RegExp(pattern);
+        return regex.test(inputLine);
     } else {
         throw new Error(`Unhandled pattern ${pattern}`);
     }
