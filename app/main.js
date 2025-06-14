@@ -1,13 +1,14 @@
 import fs from "fs";
 
 function matchPattern(inputLine, pattern) {
+    console.log(inputLine, pattern);
     if (pattern.length === 1) {
         return inputLine.includes(pattern);
     } else if (pattern === "\\d") {
         return /\d/.test(inputLine);
     } else if (pattern === "\\w") {
         return /\w/.test(inputLine);
-    } else if (pattern[0] == "[" && pattern[pattern.split("").length - 1]) {
+    } else if (pattern[0] == "[" && pattern[pattern.length - 1] == "]") {
         const chars = pattern.slice(1, -1);
         const regEx = new RegExp(`[${chars}]`, "g");
         return regEx.test(inputLine);
@@ -34,6 +35,14 @@ function matchPattern(inputLine, pattern) {
         return (
             leftChar == inputLine[leftInd] && rightCahr == inputLine[rightInd]
         );
+    } else if (pattern.includes("(")) {
+        const chars = pattern.slice(
+            pattern.indexOf("(") + 1,
+            pattern.indexOf(")"),
+        );
+        const [word_1, word_2] = chars.split("|");
+
+        return inputLine.includes(word_1) || inputLine.includes(word_2);
     } else {
         throw new Error(`Unhandled pattern ${pattern}`);
     }
